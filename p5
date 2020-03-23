@@ -1,8 +1,7 @@
 
 var w=600/2;
 var h=600/2;
-
-
+var change=0;
 var board=[[-1,-1,-1],
 [-1,-1,-1],
 [-1,-1,-1]]
@@ -22,7 +21,7 @@ mov(a,b){
 		this.boardPositionX=300;
 		this.boardPositionY=150;
 	}
-	else if(a==0&&b==2){
+	else if(a==0&&b==2){fxn
 		this.boardPositionX=450;
 		this.boardPositionY=150;
 	}
@@ -59,9 +58,6 @@ mov(a,b){
 	}
 
 }
-
-
-
 var player=[];
 for(let i=0;i<3;i++){
 	player[i]=new stone(0);
@@ -71,16 +67,17 @@ for(let i=0;i<3;i++){
 	players[i]=new stone(255);
 }
 
-var rectangleOne;
 
 function setup() {
-	createCanvas(600, 600);
+	var cnv=createCanvas(600, 600);
+
+cnv.mouseReleased(clicked);
 
 }
 
 function draw() {
 	background(122,122,122);
-	//noStroke();
+
 
 stroke(20);
 
@@ -95,22 +92,15 @@ line(width/2-w/2,height/2-h/2,width/2+w/2,height/2+h/2);
 line(450,150,150,450);
 line(150,300,450,300);
 line(300,150,300,450);
-rectMode(CENTER);
-var qw=[];
-qw=mouseReleased();
 for(let i=0;i<3;i++){
-	players[i].mov(qw[0],qw[1]);
-	players[i].so();
-	player[i].mov(qw[0],qw[1]);
-	player[i].so();
-
+player[i].so();
+players[i].so();
 }
 }
 
-function mouseReleased(){
+function clicked(){
 	var ar=[];
 	let x=mouseX;
-
 	let y=mouseY;
 	if(dist(x,y,width/2-w/2,height/2-h/2)<=20){
 		ar[0]=0;
@@ -147,9 +137,18 @@ function mouseReleased(){
 		ar[0]=2;
 		ar[1]=2;
 	}
-	ar[3]=true;
-	return ar;
-
-
-
+	if(ar[0]==null && ar[1]==null)
+	{return null;}
+if(change%2==0||change==0){
+	var o=0;
+	player[o].mov(ar[0],ar[1]);
+	change++;
+	o++;
+}
+else{
+	var k=0;
+	players[k].mov(ar[0],ar[1]);
+		change++;
+		k++;
+}
 }
