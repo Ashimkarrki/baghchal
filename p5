@@ -2,6 +2,9 @@
 var w=600/2;
 var h=600/2;
 var change=0;
+var o=0;
+var k=0;
+
 var board=[[-1,-1,-1],
 [-1,-1,-1],
 [-1,-1,-1]]
@@ -21,7 +24,7 @@ mov(a,b){
 		this.boardPositionX=300;
 		this.boardPositionY=150;
 	}
-	else if(a==0&&b==2){fxn
+	else if(a==0&&b==2){
 		this.boardPositionX=450;
 		this.boardPositionY=150;
 	}
@@ -137,16 +140,14 @@ function clicked(){
 		ar[0]=2;
 		ar[1]=2;
 	}
-	if(ar[0]==null && ar[1]==null)
-	{return null;}
 if(change%2==0||change==0){
-	var o=0;
+
 	player[o].mov(ar[0],ar[1]);
 	change++;
 	o++;
 }
 else{
-	var k=0;
+
 	players[k].mov(ar[0],ar[1]);
 		change++;
 		k++;
