@@ -1,2 +1,2 @@
 # baghchal
-minimax thapna xa;
+need tons of upgarde.
