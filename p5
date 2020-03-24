@@ -4,19 +4,19 @@ var h=600/2;
 var change=0;
 var o=0;
 var k=0;
-
-var board=[[-1,-1,-1],
-[-1,-1,-1],
-[-1,-1,-1]]
+var ar=[];
 class stone {
 	constructor(color) {
 			this.x=null;
+			this.index=0;
 			this.color=color;
 			this.y=null;
 			this.boardPositionX=null;
 			this.boardPositionY=null;
 		}
 mov(a,b){
+	this.x=a;
+	this.y=b;
 	if(a==0 && b==0){
 		this.boardPositionX=600/2-w/2;
 		this.boardPositionY=600/2-h/2;
@@ -102,7 +102,6 @@ players[i].so();
 }
 
 function clicked(){
-	var ar=[];
 	let x=mouseX;
 	let y=mouseY;
 	if(dist(x,y,width/2-w/2,height/2-h/2)<=20){
@@ -140,16 +139,50 @@ function clicked(){
 		ar[0]=2;
 		ar[1]=2;
 	}
+	for(let i=0;i<3;i++){
+		if(player[i].index==1){
+			player[i].mov(ar[0],ar[1]);
+			player[i].index=null;
+			return;
+		}
+	}
+	for(let i=0;i<3;i++){
+		if(players[i].index==1){
+			players[i].mov(ar[0],ar[1]);
+			players[i].index=null;
+			return;
+		}
+	}
+	for(let i=0;i<3;i++){
+		if(player[i].x==ar[0]&&player[i].y==ar[1]&& finish()){
+			player[i].boardPositionX=100;
+			player[i].boardPositionY=100;
+			player[i].index=1;
+			return;
+		}
+	}
+	for(let i=0;i<3;i++){
+		if(players[i].x==ar[0]&&players[i].y==ar[1]&& finish()){
+			players[i].boardPositionX=100;
+			players[i].boardPositionY=100;
+			players[i].index=1;
+			return;
+		}
+	}
 if(change%2==0||change==0){
-
 	player[o].mov(ar[0],ar[1]);
 	change++;
 	o++;
 }
 else{
-
 	players[k].mov(ar[0],ar[1]);
 		change++;
 		k++;
 }
+}
+function finish(){
+	if(player[0].x!=null&&player[1].x!=null&&player[2].x!=null&&players[0].x!=null&&players[1].x!=0&&players[2].x!=null){
+		return true;
+	}
+	else{return false;}
 }
